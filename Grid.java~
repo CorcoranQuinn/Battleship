@@ -1,0 +1,92 @@
+import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+public class Grid extends JPanel implements ActionListener
+{
+	JRadioButton verticle;
+	JRadioButton horizontal;
+	JRadioButton patrol;
+	JRadioButton battleship;
+	JRadioButton carrier;
+	JRadioButton destroyer;
+	JRadioButton sub;
+	GridBax[][] grid;
+	int shipLength;
+	boolean orientation;
+	public Grid()
+	{
+		setLayout(new GridLayout(10,10));
+		grid = new GridBax[10][10];
+		char row = 'A';
+		verticle = new JRadioButton("verticle");
+		horizontal = new JRadioButton("horizontal");
+		patrol = new JRadioButton("patrol boat (2)");
+		battleship = new JRadioButton("Battleship (4)");
+		carrier = new JRadioButton("Aircraft Carrier (5)");
+		destroyer = new JRadioButton("Destroyer (3)");
+		sub = new JRadioButton("Submarine (3)");
+		ButtonGroup ship = new ButtonGroup();
+		ButtonGroup position = new ButtonGroup();
+		position.add(verticle);
+		position.add(horizontal);
+		ship.add(patrol);
+		ship.add(battleship);
+		ship.add(carrier);
+		ship.add(destroyer);
+		ship.add(sub);
+	for(int a = 0; a<10; a++)
+	{
+
+		for(int b = 1; b<11; b++)
+		{
+			grid[a][b-1] = new GridBax(0);
+			grid[a][b-1].setText(row + "" + b);
+			add(grid[a][b-1]);
+			grid[a][b-1].addActionListener(this);
+		}
+		row++;
+	}
+
+	}
+
+	public boolean getOrientation()
+	{
+		return orientation;
+	}
+	public int getLength()
+	{
+		return shipLength;
+	}
+
+	public GridBax[][] getGrid()
+	{
+		return grid;
+	}
+	public void setState(GridBax box, int x)
+	{
+		box.setState(x);
+	}
+	public GridBax getBox(int x, int y)
+	{
+		return grid[x][y];
+	}
+	public void actionPerformed(ActionEvent e)
+	{
+		if(patrol.isSelected())
+		 shipLength = 2;
+		if(destroyer.isSelected())
+		 shipLength = 3;
+		if(sub.isSelected())
+		 shipLength = 3;
+		if(battleship.isSelected())
+		 shipLength = 4;
+		if(carrier.isSelected())
+		 shipLength = 5;
+
+		if(verticle.isSelected())
+		 orientation = true;
+		if(horizontal.isSelected())
+		 orientation = false;
+	}
+}

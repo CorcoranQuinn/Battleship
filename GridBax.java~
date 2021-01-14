@@ -1,0 +1,36 @@
+import javax.swing.*;
+import java.awt.*;
+
+public class GridBax extends JButton
+{
+	int boxState;
+	public GridBax(int State)
+	{
+		boxState = State;
+	}
+
+	public void setState(int set)
+	{
+		boxState = set;
+	}
+	public int getState()
+	{
+		return boxState;
+	}
+
+	public void draw(Graphics g)
+	{
+		if(boxState == 0)
+		{
+			g.setColor(Color.BLUE);
+		}
+		if(boxState == 1)
+		{
+			g.setColor(Color.WHITE);
+		}
+		if(boxState == 2)
+		{
+			g.setColor(Color.RED);
+		}
+	}
+}
